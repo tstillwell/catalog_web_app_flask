@@ -1,3 +1,7 @@
+# App Config Keys and Secrets
+config.ini
+client_secrets.json
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
