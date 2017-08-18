@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+<head>
+<title>Item Catalog</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link type="text/css" rel="stylesheet" href="/static/css/foundation.css" />
+<link type="text/css" rel="stylesheet" href="/static/css/app.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="/static/js/vendor/foundation.min.js"></script>
+</head>
+<body>
+<div data-sticky-container id="navbar">
+	<div class="top-bar" data-sticky data-options="marginTop:0;" data-top-anchor="1">
+		<div class="top-bar-left">
+			<ul class="menu">
+				<li><a href="/">Item Catalog</a></li>
+				{% if session['user_id'] %}
+				<li><a href="/newitem">Add Item</a></li>
+				<li><a href="/myitems">My Items</a></li>
+				{% endif %}
+			</ul>
+		</div>
+		<div class="top-bar-right">
+			<ul class="menu">
+			{% if not session['user_id'] %}
+				<li><a href="/login">Login</a></li>
+			{% endif %}
+			{% if session['user_id'] %}
+				<li class="menu-text"><span>{{ session['username'] }}</span></li>
+				<li><a href="/logout">Logout</a></li>
+			{% endif %}
+			</ul>
+		</div>
+	</div>
+</div>
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <div class="flashed alert callout" data-closable>
+    {% for message in messages %}
+      <p>{{ message }}</p>
+	  <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+      <span aria-hidden="true">&times;</span>
+  </button>
+    {% endfor %}
+	</div>
+  {% endif %}
+{% endwith %}
+<div class="expanded row">
+{% block content %}
+{% endblock %}
+</div>
+</body>
+<script>
+  $(document).foundation();
+  $("#navbar").css('z-index', "20");
+</script>
+</html>

@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="item-form small-12 medium-7 large-4 columns">
+<h2>Editing item: {{item.name}}</h2>
+<form method='post' action='/item/{{item.id}}/edit/' enctype='multipart/form-data'>
+<label> New item name: </label>
+ <input name='new-item-name' type='text' value='{{item.name}}'><br>
+<label> New item description: </label>
+ <textarea name='new-item-description'>{{item.description}}</textarea><br>
+<label> Item Category:</label>
+	<select name='category'>
+		{% for category in categories %}
+			{% if item.category.name == category.name %}
+				<option value='{{category.name}}' selected='selected'>{{category.name}}</option>
+			{% else %}
+				<option value='{{category.name}}'>{{category.name}}</option>
+			{% endif %}
+		{% endfor %}
+	</select>	
+	<button type="button" onclick="displayCategorySection()" class="button new-category-button">Create new category</button>
+	<div class="new-category-section">
+		<input name="new-category" type="text"></input>
+		<button class="button" type="button" onclick ="addCategory()" >Add New Category</button>
+	</div>	
+	<br>
+	<label>New Item Photo</label>
+		<input type='file' name='new-item-image' accept=".png, .jpg, .jpeg"></input><br>
+<input type="submit" class="button" value="Update Item"></input>
+<a class="button" href="/">Cancel</a>
+</form>
+</div>
+<script>
+$(".new-category-section").hide();
+
+function displayCategorySection() {
+	$(".new-category-section").show();
+	$(".new-category-button").hide();
+}
+
+function addCategory() {
+    var category_select = document.getElementsByName("category")[0];
+	var new_category_name = document.getElementsByName("new-category")[0].value;
+    var option = document.createElement("option");
+    option.text = new_category_name;
+	option.value = new_category_name;
+    category_select.add(option);
+	category_select.value = option.value;
+	$(".new-category-section").hide();
+	$(".new-category-button").show();
+}
+</script>
+{% endblock %}

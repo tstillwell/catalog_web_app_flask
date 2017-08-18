@@ -1,0 +1,91 @@
+.top-bar {
+  padding: 0;
+  background-color: #34282c;
+  color: #fff;
+}
+
+.top-bar ul {
+	background-color: inherit;
+	}
+
+.top-bar ul a {
+	color: #fff;
+	}
+
+.items-pane {
+  background-color: #e0e0e0;
+}
+
+.item-pane-title {
+  padding-top: 0.15em;
+  margin-left: 1em;
+}  
+
+.items-pane .row {
+  max-width: 75%;
+}
+
+.category-pane {
+  height: 100%;
+  overflow-y: scroll;
+ }
+ 
+.close-button {
+  z-index: 1;
+}
+ 
+.item-card {
+  background-color: #fdfdfd;
+  border: 1px solid #000;
+  width: 232px;
+  height: 360px;
+  margin: 2rem;
+  overflow: hidden;
+}
+
+.item-wrapper {
+  display: inline-block;
+}
+
+.item-card-thumbnail {
+  display: inline-block;
+  position: relative;
+  height: 200px;
+  width: 200px;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  padding: 2rem;
+}
+
+.item-card-title {
+  font-family: 'Open sans', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  line-height: 1.45rem;
+  margin-top: 1rem;
+  margin-bottom: 0;
+}
+
+.item-card-desc {
+  color: #34282c;
+  display: block;
+  font-family: 'Open sans', sans-serif;
+  font-size: 0.85rem;
+}
+
+.item-form {
+  margin-top: 2em;
+}
+
+.button-div {
+  position: relative;
+  top: 2.75em;
+  left: 2em;
+}
+
+@media only screen and (min-width: 40.063em) {
+  .category-display-button {
+    display: none;
+	}
+}

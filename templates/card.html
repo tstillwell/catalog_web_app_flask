@@ -1,0 +1,16 @@
+<a href='/item/{{item.id}}/'>
+<div class="item-card small-12 medium-6 large-3 columns">
+	<div class="item-card-thumbnail"
+	{% if item.photo_path %}
+    style="background-image: url({{item.photo_path}});">
+	{% endif %}
+	{% if not item.photo_path %}
+	style="background-image: url(/static/images/no-img.jpg);">
+	{% endif %}
+	</div>
+	<div class="item-card-info">
+		<h3 class="item-card-title">{{item.name}}</h3>
+		<span class="item-card-desc">{{item.description}}</span>
+	</div>	
+</div>
+</a>
