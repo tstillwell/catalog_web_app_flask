@@ -89,8 +89,9 @@ def save_image_as_jpg(image_path):
 def itemCard(item):
 	""" Used in templates to create cards which display item info """
 	return render_template('card.html', item=item)
-
+# Add itemCard to jinja globals so it can be called in templates
 app.jinja_env.globals.update(itemCard=itemCard)
+
 
 # Front Page
 @app.route('/')
