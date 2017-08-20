@@ -405,13 +405,15 @@ def ViewCategory(category_name):
 # My items view
 @app.route('/myitems/')
 def MyItems():
+	if 'username' not in login_session:
+		return redirect('/login')
 	user_id = login_session['user_id']
 	users_items = session.query(Item).filter_by(user_id = user_id).all()
 	response = make_response(render_template('myitems.html', items = users_items))
 	response.cache_control.no_store = True
 	response.cache_control.no_cache = True
 	return response
-# Need to make sure this link redirects to login if no user detected
+
 	
 if __name__ == '__main__':
 	app.debug = True
