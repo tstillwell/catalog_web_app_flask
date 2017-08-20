@@ -21,18 +21,19 @@ CLIENT_ID = json.loads(
 
 app = Flask(__name__)
 
-engine = create_engine('sqlite:///itemcatalog.db')
+config = ConfigParser.RawConfigParser()
+config.read('config.ini')
+DB_URL = config.get('database', 'url')
+
+engine = create_engine(DB_URL)
 Base.metadata.bind = engine
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
 
 UPLOAD_FOLDER = './static/images/'
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
-
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-config = ConfigParser.RawConfigParser()
-config.read('config.ini')
 APP_SECRET = config.get('app-keys', 'AppSecretKey')
 MS_APP_ID = config.get('app-keys', 'MicrosoftID')
 MS_SECRET = config.get('app-keys', 'MicrosoftSecretKey')
