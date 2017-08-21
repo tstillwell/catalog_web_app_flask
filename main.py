@@ -17,15 +17,24 @@ from oauth2client.client import flow_from_clientsecrets
 from oauth2client.client import FlowExchangeError
 
 
-CLIENT_ID = json.loads(
-    open('client_secrets.json', 'r').read())['web']['client_id']
-
 app = Flask(__name__)
 
 config = ConfigParser.RawConfigParser()
-config.read('config.ini')
-DB_URL = config.get('database', 'url')
 
+try:
+    config.read('config.ini')
+except IOError:
+    print "config.ini cannot be opened"
+    raise
+
+try:  # Read database URL from config.ini file
+    DB_URL = config.get('database', 'url')
+except ConfigParser.NoOptionError:
+    print("Could not read database URL value from config.ini")
+except ConfigParser.NoSectionError:
+    print("[database] section is not present in config.ini")
+
+# Database configuration/ORM variables used for accessing external db
 engine = create_engine(DB_URL)
 Base.metadata.bind = engine
 DBSession = sessionmaker(bind=engine)
@@ -35,11 +44,17 @@ UPLOAD_FOLDER = './static/images/'
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-APP_SECRET = config.get('app-keys', 'AppSecretKey')
-MS_APP_ID = config.get('app-keys', 'MicrosoftID')
-MS_SECRET = config.get('app-keys', 'MicrosoftSecretKey')
-GOOGLE_APP_ID = config.get('app-keys', 'GoogleID')
-GOOGLE_SECRET_KEY = config.get('app-keys', 'GoogleSecretKey')
+try:
+    APP_SECRET = config.get('app-keys', 'AppSecretKey')
+    MS_APP_ID = config.get('app-keys', 'MicrosoftID')
+    MS_SECRET = config.get('app-keys', 'MicrosoftSecretKey')
+except ConfigParser.NoOptionError:
+    print("Could not read all app-key values from config.ini")
+except ConfigParser.NoSectionError:
+    print("[app-keys] section is not present in config.ini")
+
+GOOGLE_APP_ID = json.loads(
+    open('client_secrets.json', 'r').read())['web']['client_id']
 
 
 def make_user(login_session):
@@ -52,11 +67,8 @@ def make_user(login_session):
 
 
 def user_by_session_id():
-    try:
-        user = session.query(User).filter_by(id=login_session['user_id']).one()
-    except:
-        user = None
-    finally:
+    user = session.query(User).filter_by(id=login_session['user_id']).one()
+    if user:
         return user
 
 
@@ -64,7 +76,7 @@ def userid_by_email(email):
     try:
         user = session.query(User).filter_by(email=email).one()
         return user.id
-    except:
+    except sqlalchemy.orm.exc.NoResultFound:
         return None
 
 
@@ -90,7 +102,7 @@ def save_image_as_jpg(image_path):
         image_file = Image.open(image_path)
         image_file.save(filename_no_extension + '.jpg')
         return True
-    except:
+    except IOError:
         return False
 
 
@@ -143,8 +155,6 @@ def add_photo_to_database(filename, item):
         item.photo_path = "/static/images/" + new_filename
         session.add(item)
         session.commit()
-    else:
-        pass
 
 
 # Add item
@@ -288,7 +298,7 @@ def gconnect():
         return error_response_auth_flow("User ID mismatch")
 
     # Verify that the access token is valid for this app.
-    if result['issued_to'] != CLIENT_ID:
+    if result['issued_to'] != GOOGLE_APP_ID:
         return error_response_auth_flow("Token client ID mismatch")
 
     stored_credentials = login_session.get('credentials')
