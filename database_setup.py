@@ -36,6 +36,7 @@ class Item(Base):
                 'description': self.description,
                 'id': self.id,
                 'category': self.category.name,
+                'image_location': self.photo_path,
                }
 
 

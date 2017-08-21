@@ -19,7 +19,7 @@
 .item-pane-title {
   padding-top: 0.15em;
   margin-left: 1em;
-}  
+}
 
 .items-pane .row {
   max-width: 75%;
@@ -27,13 +27,14 @@
 
 .category-pane {
   height: 100%;
+  padding-left: 1em;
   overflow-y: scroll;
  }
- 
+
 .close-button {
   z-index: 1;
 }
- 
+
 .item-card {
   background-color: #fdfdfd;
   border: 1px solid #000;

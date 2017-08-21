@@ -107,9 +107,10 @@ def save_image_as_jpg(image_path):
     """ Takes uploaded image, and saves it in jpg format """
     try:
         filename = image_path.split('/')[-1]
-        filename_no_extension = filename.split('.')[1]
+        filename_no_extension = filename.split('.')[0]
         image_file = Image.open(image_path)
-        image_file.save(filename_no_extension + '.jpg')
+        image_file.save(UPLOAD_FOLDER + filename_no_extension + '.jpg')
+        image_file.close()
         return True
     except IOError:
         return False
@@ -166,6 +167,15 @@ def add_photo_to_database(filename, item):
         session.commit()
 
 
+def submitted_category(form_data):
+    """ Takes a /newitem form submission and assign a valid category """
+    if 'category' in form_data:
+        submitted_category = form_data['category']
+    if form_data['new-category'] == '':
+        submitted_category = 'Uncategorized'
+    return submitted_category
+
+
 # Add item
 @app.route('/newitem/', methods=['GET', 'POST'])
 def AddNewItem():
@@ -177,8 +187,8 @@ def AddNewItem():
         return render_template('additem.html', categories=categories)
 
     if request.method == 'POST':
-        submitted_category = request.form['category']
-        item_category = potential_new_category(submitted_category)
+        form_data = request.form
+        item_category = potential_new_category(submitted_category(form_data))
         file = request.files['item-image']
         filename = save_image(file)
         newItem = Item(name=request.form['item-name'],
