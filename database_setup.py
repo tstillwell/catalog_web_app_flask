@@ -4,6 +4,7 @@ from sqlalchemy import Column, ForeignKey, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 from sqlalchemy import create_engine
+import ConfigParser
 
 
 Base = declarative_base()
@@ -44,5 +45,9 @@ class User(Base):
 	email = Column(String(200), nullable=False)
 
 
-engine = create_engine('sqlite:///itemcatalog.db')
+config = ConfigParser.RawConfigParser()
+config.read('config.ini')
+DB_URL = config.get('database', 'url')
+
+engine = create_engine(DB_URL)
 Base.metadata.create_all(engine)
