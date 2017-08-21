@@ -12,6 +12,7 @@ from PIL import Image
 from werkzeug import secure_filename
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
+import sqlalchemy.orm.exc
 from database_setup import Category, Item, User, Base
 from oauth2client.client import flow_from_clientsecrets
 from oauth2client.client import FlowExchangeError
@@ -52,6 +53,14 @@ except ConfigParser.NoOptionError:
     print("Could not read all app-key values from config.ini")
 except ConfigParser.NoSectionError:
     print("[app-keys] section is not present in config.ini")
+
+try:
+    MS_MAIN_URL = config.get('ms-oauth2', 'main-url')
+    MS_CONNECT_URL = config.get('ms-oauth2', 'msconnect-url')
+except ConfigParser.NoOptionError:
+    print("Could not read url values from config.ini")
+except ConfigParser.NoSectionError:
+    print("[ms-oauth2] section is not present in config.ini")
 
 GOOGLE_APP_ID = json.loads(
     open('client_secrets.json', 'r').read())['web']['client_id']
@@ -253,7 +262,7 @@ def Login():
                       "scope": "user.read",
                       "response_type": "code",
                       "response_mode": "query",
-                      "redirect_uri": "http://localhost:5000/msconnect/",
+                      "redirect_uri": MS_CONNECT_URL,
                       "state": state}
     ms_auth_url += urllib.urlencode(ms_auth_params)
     return render_template('login.html', STATE=state, ms_url=ms_auth_url,
@@ -346,7 +355,7 @@ def msconnect():
     request_data = {'client_id': MS_APP_ID,
                     'scope': 'user.read',
                     'grant_type': 'authorization_code',
-                    'redirect_uri': 'http://localhost:5000/msconnect/',
+                    'redirect_uri': MS_CONNECT_URL,
                     'client_secret': MS_SECRET,
                     'code': code}
     token_request = requests.post(token_url, data=request_data)
@@ -396,7 +405,7 @@ def msdisconnect():
     del login_session['auth_provider']
     logout_url = 'https://login.live.com/oauth20_logout.srf?'
     logout_params = {'client_id': MS_APP_ID,
-                     'redirect_uri': "http://localhost:5000"}
+                     'redirect_uri': MS_MAIN_URL}
     logout_url += urllib.urlencode(logout_params)
     flash('Logged out of your Microsoft account.')
     return redirect(logout_url)

@@ -125,6 +125,8 @@ the URL of the app
 and
 `https://www.sitename.com/msconnect/`
 
+You need to put these URLs in `config.ini` (continue reading)
+
 The logout URL by default is
 `https://www.sitename.com/logout/`
 
@@ -156,6 +158,13 @@ There should be 2 entries in `config.ini` pertaining to Microsoft in the `[app-k
     MicrosoftID: 0cb...30b4
     MicrosoftSecretKey: v51....G6
 
+
+and two entries under `[ms-oauth2]`, the redirect URLs from earlier.
+
+    [ms-oauth2]
+    main-url: https://www.sitename.com
+    msconnect-url: https://www.sitename.com/msconnect/
+
 ___
 
 #### Install Python and dependencies
@@ -170,6 +179,8 @@ Once that is done, you need to install Flask and the other Python code dependenc
 
 `pip install -r requirements.txt`
 ___
+
+### Preparing config files
 
 Once you have completed these steps- go to the `config.ini`
 file and ensure a Secret Key is set here. Make sure the secret
@@ -188,6 +199,10 @@ A complete `config.ini` file should look something like this:
 
     MicrosoftID: 0cb...30b4
     MicrosoftSecretKey: v51....G6
+
+    [ms-oauth2]
+    main-url: https://www.sitename.com
+    msconnect-url: https://www.sitename.com/msconnect/
 
 and as a reminder, you should have the `client_secrets.json` file
 that was exported from Google after registering the app.
@@ -213,10 +228,13 @@ This means the app is up and running and serving requests. You should be able to
 
 You can test the third party Logins using the accounts you made earlier and if they work then OAUTH2 is working properly.
 
-If you run into any issues running the app or have any ideas for improvement feel free to open an issue on github.
-
 You can change the port used by the app
 by modifying the `port=5000` keyword at the bottom of the file.
+
+### Issues and Suggestions
+
+If you run into any issues running the app or have any ideas for improvement feel free to open an issue on github.
+
 
 # Built with Help From
 
