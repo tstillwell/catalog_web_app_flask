@@ -249,6 +249,12 @@ https://github.com/pallets/flask/
 
 https://github.com/pallets/flask/blob/master/LICENSE
 
+### Zurb Foundation
+
+http://foundation.zurb.com/
+
+https://github.com/zurb/foundation-sites/blob/develop/LICENSE
+
 ### Python Imaging Library (PIL)
 
 http://pythonware.com/products/pil/
