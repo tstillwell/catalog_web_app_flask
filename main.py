@@ -239,7 +239,7 @@ def EditItem(item_id):
         session.add(item_to_edit)
         session.commit()
         flash('Item updated.')
-        return redirect('/myitems/')
+        return redirect(url_for('MyItems'))
 
 
 # Delete item
