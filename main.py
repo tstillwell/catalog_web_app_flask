@@ -199,7 +199,7 @@ def AddNewItem():
         session.commit()
         add_photo_to_database(filename, newItem)
         flash('Item added successfully.')
-        return redirect('/')
+        return redirect(url_for('FrontPage'))
 
 
 # View item
@@ -258,7 +258,7 @@ def DeleteItem(item_id):
         session.delete(item)
         session.commit()
         flash('Item removed from catalog.')
-        return redirect('/')
+        return redirect(url_for('FrontPage'))
 
 
 # Login
@@ -382,7 +382,7 @@ def msconnect():
         make_user(login_session)
     login_session['user_id'] = userid_by_email(login_session['email'])
     login_session['auth_provider'] = 'microsoft'
-    return redirect('/')
+    return redirect(url_for('FrontPage'))
 
 
 @app.route('/gdisconnect/')
@@ -404,7 +404,7 @@ def gdisconnect():
         del login_session['user_id']
         del login_session['auth_provider']
         flash('Logged out of your Google account.')
-    return redirect('/')
+    return redirect(url_for('FrontPage'))
 
 
 @app.route('/msdisconnect/')
