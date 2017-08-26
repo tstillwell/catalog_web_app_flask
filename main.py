@@ -7,7 +7,7 @@ import json
 import requests
 import ConfigParser
 from flask import (Flask, request, redirect, session as login_session,
-                   jsonify, render_template, make_response, flash)
+                   jsonify, render_template, make_response, flash, url_for)
 from PIL import Image
 from werkzeug import secure_filename
 from sqlalchemy import create_engine
@@ -180,7 +180,7 @@ def submitted_category(form_data):
 @app.route('/newitem/', methods=['GET', 'POST'])
 def AddNewItem():
     if 'username' not in login_session:
-        return redirect('/login')
+        return redirect(url_for('Login'))
 
     if request.method == 'GET':
         categories = session.query(Category).all()
@@ -213,7 +213,7 @@ def ViewItem(item_id):
 @app.route('/item/<int:item_id>/edit/', methods=['GET', 'POST'])
 def EditItem(item_id):
     if 'username' not in login_session:
-        return redirect('/login')
+        return redirect(url_for('Login'))
 
     item = session.query(Item).filter_by(id=item_id).one()
     if item.user_id != userid_by_email(login_session['email']):
@@ -246,7 +246,7 @@ def EditItem(item_id):
 @app.route('/item/<int:item_id>/delete/', methods=['GET', 'POST'])
 def DeleteItem(item_id):
     if 'username' not in login_session:
-        return redirect('/login')
+        return redirect(url_for('Login'))
     item = session.query(Item).filter_by(id=item_id).one()
     if item.user_id != userid_by_email(login_session['email']):
         return "You are not the owner of this item."
@@ -455,7 +455,7 @@ def ViewCategory(category_name):
 @app.route('/myitems/')
 def MyItems():
     if 'username' not in login_session:
-        return redirect('/login')
+        return redirect(url_for('Login'))
     user_id = login_session['user_id']
     users_items = session.query(Item).filter_by(user_id=user_id).all()
     response = make_response(render_template('myitems.html',
