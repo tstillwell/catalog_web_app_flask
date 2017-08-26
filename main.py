@@ -424,9 +424,9 @@ def msdisconnect():
 @app.route('/logout/')
 def logout():
     if login_session['auth_provider'] == 'google':
-        return redirect('/gdisconnect/')
+        return redirect(url_for('gdisconnect'))
     if login_session['auth_provider'] == 'microsoft':
-        return redirect('/msdisconnect')
+        return redirect(url_for('msdisconnect'))
 
 
 # JSON item
