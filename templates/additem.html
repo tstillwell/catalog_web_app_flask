@@ -7,7 +7,7 @@
 	<input type='text' name='item-name'>
 	<label>Description </label>
 	<input type='text' name='item-description'>
-	<label>Category </label> 
+	<label>Category </label>
 	<select name='category'>
 		{% for category in categories %}
 			<option value='{{category.name}}'>{{category.name}}</option>
@@ -15,7 +15,7 @@
 	</select>
 	<button type="button" onclick="displayCategorySection()" class="button new-category-button">Create new category</button>
 	<div class="new-category-section">
-		<h3>New Category Name</h3> 
+		<h3>New Category Name</h3>
 		<input name="new-category" type="text"></input>
 		<button class="button" type="button" onclick ="addCategory()" >Add New Category</button>
 	</div>
@@ -36,10 +36,10 @@ function displayCategorySection() {
 
 function addCategory() {
     var category_select = document.getElementsByName("category")[0];
-	var new_category_name = document.getElementsByName("new-category")[0].value;
+		var new_category_name = document.getElementsByName("new-category")[0].value;
     var option = document.createElement("option");
     option.text = new_category_name;
-	option.value = new_category_name;
+		option.value = new_category_name;
     category_select.add(option);
 	category_select.value = option.value;
 	$(".new-category-section").hide();
