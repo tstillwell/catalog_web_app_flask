@@ -14,10 +14,10 @@
 	<div class="top-bar" data-sticky data-options="marginTop:0;" data-top-anchor="1">
 		<div class="top-bar-left">
 			<ul class="menu">
-				<li><a href="/">Item Catalog</a></li>
+				<li><a href="{{ url_for('FrontPage') }}">Item Catalog</a></li>
 				{% if session['user_id'] %}
-				<li><a href="/newitem">Add Item</a></li>
-				<li><a href="/myitems">My Items</a></li>
+				<li><a href="{{ url_for('AddNewItem') }}">Add Item</a></li>
+				<li><a href="{{ url_for('MyItems') }}">My Items</a></li>
 				{% endif %}
 			</ul>
 		</div>
