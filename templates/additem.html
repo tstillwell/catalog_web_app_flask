@@ -2,7 +2,7 @@
 {% block content %}
 <div class="item-form small-12 medium-7 large-4 columns">
 <h2>Add New item to Catalog</h2>
-<form method='post' action='/newitem/' enctype='multipart/form-data'>
+<form method='post' action='{{ url_for('AddNewItem') }}' enctype='multipart/form-data'>
 	<label> Item name </label>
 	<input type='text' name='item-name'>
 	<label>Description </label>

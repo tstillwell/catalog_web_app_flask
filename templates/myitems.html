@@ -6,8 +6,8 @@
 		{% for item in items %}
 		<div class="item-wrapper">
 				<div class="button-div">
-					<a class="edit-item button" href="/item/{{item.id}}/edit/">Edit</a>
-					<a class="delete-item hollow button alert" href="/item/{{item.id}}/delete/">Delete</a>
+					<a class="edit-item button" href="{{ url_for('EditItem', item_id=item.id ) }}">Edit</a>
+					<a class="delete-item hollow button alert" href="{{ url_for('DeleteItem', item_id=item.id ) }}">Delete</a>
 				</div>
 				{{ itemCard(item) | safe }}
 		</div>

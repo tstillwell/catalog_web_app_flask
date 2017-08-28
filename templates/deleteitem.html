@@ -2,10 +2,10 @@
 {% block content %}
 {{ itemCard(item) | safe }}
 <div class="delete-confirm-form small-10 columns">
-<form method='post' action='/item/{{item.id}}/delete/'>
+<form method='post' action='{{ url_for('DeleteItem', item_id=item.id ) }}'>
 	<p> Are you sure you want to delete this item from the catalog?
         Once you do this, it cannot be undone. </p>
 	<input class="button alert" type='submit' value='Delete item'>
 </form>
-</div>	
+</div>
 {% endblock %}

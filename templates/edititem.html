@@ -2,7 +2,7 @@
 {% block content %}
 <div class="item-form small-12 medium-7 large-4 columns">
 <h2>Editing item: {{item.name}}</h2>
-<form method='post' action='/item/{{item.id}}/edit/' enctype='multipart/form-data'>
+<form method='post' action='{{ url_for('EditItem', item_id=item.id ) }}' enctype='multipart/form-data'>
 <label> New item name: </label>
  <input name='new-item-name' type='text' value='{{item.name}}'><br>
 <label> New item description: </label>
@@ -16,12 +16,12 @@
 				<option value='{{category.name}}'>{{category.name}}</option>
 			{% endif %}
 		{% endfor %}
-	</select>	
+	</select>
 	<button type="button" onclick="displayCategorySection()" class="button new-category-button">Create new category</button>
 	<div class="new-category-section">
 		<input name="new-category" type="text"></input>
 		<button class="button" type="button" onclick ="addCategory()" >Add New Category</button>
-	</div>	
+	</div>
 	<br>
 	<label>New Item Photo</label>
 		<input type='file' name='new-item-image' accept=".png, .jpg, .jpeg"></input><br>

@@ -11,7 +11,7 @@
 			<div class="sticky" data-sticky data-options="marginTop:2.75;" data-top-anchor="item-pane" >
 			<h2>Categories</h2>
 			{% for category in categories %}
-				<a href='/category/{{category.name}}/'><h5>{{category.name}}</h5></a>
+				<a href='{{ url_for('ViewCategory', category_name = category.name) }}'><h5>{{category.name}}</h5></a>
 			{% endfor %}
 			</div>
 		</div>
@@ -24,5 +24,5 @@
 		{% endfor %}
 		</div>
 	</div>
-</div>	
+</div>
 {% endblock %}
