@@ -3,6 +3,7 @@
 <div class="item-form small-12 medium-7 large-4 columns">
 <h2>Editing item: {{item.name}}</h2>
 <form method='post' action='{{ url_for('EditItem', item_id=item.id ) }}' enctype='multipart/form-data'>
+<input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
 <label> New item name: </label>
  <input name='new-item-name' type='text' value='{{item.name}}'><br>
 <label> New item description: </label>
