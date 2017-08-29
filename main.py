@@ -16,9 +16,12 @@ import sqlalchemy.orm.exc
 from database_setup import Category, Item, User, Base
 from oauth2client.client import flow_from_clientsecrets
 from oauth2client.client import FlowExchangeError
+from flask_wtf.csrf import CSRFProtect
+
 
 
 app = Flask(__name__)
+csrf = CSRFProtect(app)
 
 config = ConfigParser.RawConfigParser()
 
