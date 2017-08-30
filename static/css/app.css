@@ -12,6 +12,10 @@
 	color: #fff;
 	}
 
+.user-name {
+	font-size: 0.9rem;
+	}
+
 .items-pane {
   background-color: #e0e0e0;
 }

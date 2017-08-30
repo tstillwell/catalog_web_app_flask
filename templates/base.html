@@ -27,8 +27,11 @@
 				<li><a href="{{ url_for('Login') }}">Login</a></li>
 			{% endif %}
 			{% if session['user_id'] %}
-				<li class="menu-text"><span>{{ session['username'] }}</span></li>
-				<li><a href="{{ url_for('logout') }}">Logout</a></li>
+				<li class="menu-text"><span class="user-name">{{ session['username'] }}</span></li>
+				<form method="post" action="{{ url_for('logout') }}">
+					<input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+					<li><input type="submit" value="Logout" class="menu-text clear button"></input></li>
+				</form>
 			{% endif %}
 			</ul>
 		</div>

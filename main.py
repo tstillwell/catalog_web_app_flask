@@ -424,7 +424,7 @@ def msdisconnect():
     return redirect(logout_url)
 
 
-@app.route('/logout/')
+@app.route('/logout/', methods=['POST'])
 def logout():
     if login_session['auth_provider'] == 'google':
         return redirect(url_for('gdisconnect'))
