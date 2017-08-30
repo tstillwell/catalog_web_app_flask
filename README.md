@@ -182,10 +182,24 @@ ___
 
 ### Preparing config files
 
-Once you have completed these steps- go to the `config.ini`
-file and ensure a Secret Key is set here. Make sure the secret
+Once you have completed these steps- you need to create
+a new plaintext file named `config.ini`
+
+ensure a Secret Key is set here along with the values
+listed below. Make sure the secret
 key is cryptographically strong, as it is the
 basis for anti-tamper security the app uses.
+
+In this file you also need to store the MicrosoftID
+and MicrosoftSecretKey data obtained
+obtained as outlined in the "registering with Microsoft"
+section.
+
+The ms-oauth2 section requires main-url and msconnect-url
+values. These are created while registering the app with microsoft.
+
+Without all four of the Microsoft-specific values,
+Microsoft OAUTH2 login will not work.
 
 A complete `config.ini` file should look something like this:
 
@@ -206,6 +220,7 @@ A complete `config.ini` file should look something like this:
 
 and as a reminder, you should have the `client_secrets.json` file
 that was exported from Google after registering the app.
+Without this file, Google AUTH2 login will not work.
 
 Both `config.ini` and `client_secrets.json` belong
 in the main app directory (with main.py).
