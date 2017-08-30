@@ -5,15 +5,14 @@ import urllib
 import httplib2
 import json
 import requests
-import ConfigParser
 from flask import (Flask, request, redirect, session as login_session,
                    jsonify, render_template, make_response, flash, url_for)
 from PIL import Image
 from werkzeug import secure_filename
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
 import sqlalchemy.orm.exc
-from database_setup import Category, Item, User, Base
+from database_setup import Category, Item, User
+from config import (session, APP_SECRET, MS_APP_ID, MS_SECRET,
+					   MS_MAIN_URL, MS_CONNECT_URL, GOOGLE_APP_ID)
 from oauth2client.client import flow_from_clientsecrets
 from oauth2client.client import FlowExchangeError
 from flask_wtf.csrf import CSRFProtect
@@ -23,50 +22,9 @@ from flask_wtf.csrf import CSRFProtect
 app = Flask(__name__)
 csrf = CSRFProtect(app)
 
-config = ConfigParser.RawConfigParser()
-
-try:
-    config.read('config.ini')
-except IOError:
-    print "config.ini cannot be opened"
-    raise
-
-try:  # Read database URL from config.ini file
-    DB_URL = config.get('database', 'url')
-except ConfigParser.NoOptionError:
-    print("Could not read database URL value from config.ini")
-except ConfigParser.NoSectionError:
-    print("[database] section is not present in config.ini")
-
-# Database configuration/ORM variables used for accessing external db
-engine = create_engine(DB_URL)
-Base.metadata.bind = engine
-DBSession = sessionmaker(bind=engine)
-session = DBSession()
-
 UPLOAD_FOLDER = './static/images/'
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-
-try:
-    APP_SECRET = config.get('app-keys', 'AppSecretKey')
-    MS_APP_ID = config.get('app-keys', 'MicrosoftID')
-    MS_SECRET = config.get('app-keys', 'MicrosoftSecretKey')
-except ConfigParser.NoOptionError:
-    print("Could not read all app-key values from config.ini")
-except ConfigParser.NoSectionError:
-    print("[app-keys] section is not present in config.ini")
-
-try:
-    MS_MAIN_URL = config.get('ms-oauth2', 'main-url')
-    MS_CONNECT_URL = config.get('ms-oauth2', 'msconnect-url')
-except ConfigParser.NoOptionError:
-    print("Could not read url values from config.ini")
-except ConfigParser.NoSectionError:
-    print("[ms-oauth2] section is not present in config.ini")
-
-GOOGLE_APP_ID = json.loads(
-    open('client_secrets.json', 'r').read())['web']['client_id']
 
 
 def make_user(login_session):
