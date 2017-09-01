@@ -1,3 +1,10 @@
+""" Main catalog application module. Intended for deployment using Flask.
+
+    Built for Flask Framework. Uses Python 2.7.
+    Connects to database using SQLAlchemy with database_setup.py.
+    Imports database config, API keys & application secrets using config.py
+    See README file for more info.
+"""
 import os
 import random
 import string
@@ -12,11 +19,10 @@ from werkzeug import secure_filename
 import sqlalchemy.orm.exc
 from database_setup import Category, Item, User
 from config import (session, APP_SECRET, MS_APP_ID, MS_SECRET,
-					   MS_MAIN_URL, MS_CONNECT_URL, GOOGLE_APP_ID)
+                    MS_MAIN_URL, MS_CONNECT_URL, GOOGLE_APP_ID)
 from oauth2client.client import flow_from_clientsecrets
 from oauth2client.client import FlowExchangeError
 from flask_wtf.csrf import CSRFProtect
-
 
 
 app = Flask(__name__)
