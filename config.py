@@ -1,3 +1,14 @@
+"""
+Reads config from config.ini and client_secrets.json
+
+Configures database session object used by SQLAlchemy
+to read & update database.
+Reads client ids/client secrets & database url from
+config files.
+All relevant info is imported by main.py 'import config'
+More info available in README file.
+"""
+
 import ConfigParser
 import json
 from sqlalchemy import create_engine
