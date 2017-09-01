@@ -72,8 +72,10 @@ file under the `[database]` section like this:
     url: postgresql://items.db
 
 
-Normally, If a database exists at that location the app will use it
-if one does not exist it will be created.
+Normally, If a database exists at that location the app will use it.
+
+If one does not exist, a new (empty) database will be
+created (if the OS/acct allows db creation)
 
 ___
 
