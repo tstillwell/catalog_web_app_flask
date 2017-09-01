@@ -2,7 +2,7 @@
 
 **Create and store a simple online catalog of items**
 
-This application hosts a digital item catalog.
+Hosts a digital item catalog web application.
 
 Allows users to browse the catalog of items
 and show items in each category.
