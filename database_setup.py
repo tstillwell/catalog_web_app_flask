@@ -1,3 +1,17 @@
+""" Database definitions for item catalog.
+
+    Imports and parses config.ini file 'database' section
+    SQLAlchemy/ORM creates a database
+    for the target RDBMS using the given dialect and database
+    name in the database url string read from config.ini
+
+    If the database exists at the URL,
+    the ORM connects to it instead.
+
+    Imported by config.py and main.py
+"""
+
+
 import os
 import sys
 from sqlalchemy import Column, ForeignKey, Integer, String
