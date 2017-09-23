@@ -2,23 +2,24 @@
 
 **Create and store a simple online catalog of items**
 
-Hosts a digital item catalog web application.
+A digital item catalog web application.
 
-Allows users to browse the catalog of items
-and show items in each category.
+Allow users to browse a catalog of items
+and show items contained in distinct categories.
 
-Allows logged in users to add items to a catalog,
+Lets logged in users add items to the catalog,
 assign a photo and category to each item as well as update/edit/delete
 items they previously added.
 
-Because the app runs on the Flask web framework and uses SQL Alchemy
+---
+
+Runs on the Flask web framework and uses SQL Alchemy so
 it can be easily configured to run in many server and database environments.
 
 The app authorization and authentication is provided using **OAUTH2**
-and is set up to use secure **Google and Microsoft OAUTH2 login**.
+and is setup to use secure **Google**  and **Microsoft** account login via OAUTH2.
 
-In order to create, update, or delete items from the catalog,
-users can login using either Google or Microsoft/Azure AD accounts.
+
 
 ## Setup
 
