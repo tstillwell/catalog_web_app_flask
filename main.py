@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 """ Main catalog application module. Intended for deployment using Flask.
 
     Built for Flask Framework. Uses Python 2.7.
