@@ -28,7 +28,7 @@ from flask_wtf.csrf import CSRFProtect
 
 app = Flask(__name__)
 csrf = CSRFProtect(app)
-
+app.secret_key = APP_SECRET  # imported from config.ini
 UPLOAD_FOLDER = './static/images/'
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -435,5 +435,4 @@ def MyItems():
 
 if __name__ == '__main__':
     app.debug = True
-    app.secret_key = APP_SECRET  # imported from config.ini
     app.run(host='0.0.0.0', port=5000)
