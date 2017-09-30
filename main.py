@@ -139,8 +139,6 @@ def submitted_category(form_data):
     """ Takes a /newitem form submission and assign a valid category """
     if 'category' in form_data:
         submitted_category = form_data['category']
-    if form_data['new-category'] == '':
-        submitted_category = 'Uncategorized'
     return submitted_category
 
 
