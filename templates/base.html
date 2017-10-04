@@ -39,7 +39,7 @@
 </div>
 {% with messages = get_flashed_messages() %}
   {% if messages %}
-    <div class="flashed alert callout" data-closable>
+    <div class="flashed success callout" data-closable>
     {% for message in messages %}
       <p>{{ message }}</p>
 	  <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
