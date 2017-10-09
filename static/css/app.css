@@ -48,6 +48,11 @@
   overflow: hidden;
 }
 
+.item-card:hover {
+  transform: translate3d(0, -2px, 0);
+  box-shadow: 4px 10px 5px #888;
+}
+
 .item-wrapper {
   display: inline-block;
 }
