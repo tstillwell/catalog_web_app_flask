@@ -11,42 +11,42 @@
 </head>
 <body>
 <div data-sticky-container id="navbar">
-	<div class="top-bar" data-sticky data-options="marginTop:0;" data-top-anchor="1">
-		<div class="top-bar-left">
-			<ul class="menu">
-				<li><a href="{{ url_for('FrontPage') }}">Item Catalog</a></li>
-				{% if session['user_id'] %}
-				<li><a href="{{ url_for('AddNewItem') }}">Add Item</a></li>
-				<li><a href="{{ url_for('MyItems') }}">My Items</a></li>
-				{% endif %}
-			</ul>
-		</div>
-		<div class="top-bar-right">
-			<ul class="menu">
-			{% if not session['user_id'] %}
-				<li><a href="{{ url_for('Login') }}">Login</a></li>
-			{% endif %}
-			{% if session['user_id'] %}
-				<li class="menu-text"><span class="user-name">{{ session['username'] }}</span></li>
-				<form method="post" action="{{ url_for('logout') }}">
-					<input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
-					<li><input type="submit" value="Logout" class="menu-text clear button"></input></li>
-				</form>
-			{% endif %}
-			</ul>
-		</div>
-	</div>
+    <div class="top-bar" data-sticky data-options="marginTop:0;" data-top-anchor="1">
+        <div class="top-bar-left">
+            <ul class="menu">
+                <li><a href="{{ url_for('FrontPage') }}">Item Catalog</a></li>
+                {% if session['user_id'] %}
+                <li><a href="{{ url_for('AddNewItem') }}">Add Item</a></li>
+                <li><a href="{{ url_for('MyItems') }}">My Items</a></li>
+                {% endif %}
+            </ul>
+        </div>
+        <div class="top-bar-right">
+            <ul class="menu">
+            {% if not session['user_id'] %}
+                <li><a href="{{ url_for('Login') }}">Login</a></li>
+            {% endif %}
+            {% if session['user_id'] %}
+                <li class="menu-text"><span class="user-name">{{ session['username'] }}</span></li>
+                <form method="post" action="{{ url_for('logout') }}">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                    <li><input type="submit" value="Logout" class="menu-text clear button"></input></li>
+                </form>
+            {% endif %}
+            </ul>
+        </div>
+    </div>
 </div>
 {% with messages = get_flashed_messages() %}
   {% if messages %}
     <div class="flashed success callout" data-closable>
     {% for message in messages %}
       <p>{{ message }}</p>
-	  <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+      <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
       <span aria-hidden="true">&times;</span>
   </button>
     {% endfor %}
-	</div>
+    </div>
   {% endif %}
 {% endwith %}
 <div class="expanded row">
