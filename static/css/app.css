@@ -6,15 +6,15 @@
 
 .top-bar ul {
     background-color: inherit;
-    }
+}
 
 .top-bar ul a {
     color: #fff;
-    }
+}
 
 .user-name {
     font-size: 0.9rem;
-    }
+}
 
 .items-pane {
   background-color: #e0e0e0;
@@ -33,7 +33,7 @@
   height: 100%;
   padding-left: 1em;
   overflow-y: scroll;
- }
+}
 
 .close-button {
   z-index: 1;
