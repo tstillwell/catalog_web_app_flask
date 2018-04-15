@@ -5,16 +5,16 @@
 }
 
 .top-bar ul {
-	background-color: inherit;
-	}
+    background-color: inherit;
+    }
 
 .top-bar ul a {
-	color: #fff;
-	}
+    color: #fff;
+    }
 
 .user-name {
-	font-size: 0.9rem;
-	}
+    font-size: 0.9rem;
+    }
 
 .items-pane {
   background-color: #e0e0e0;
@@ -98,5 +98,5 @@
 @media only screen and (min-width: 40.063em) {
   .category-display-button {
     display: none;
-	}
+    }
 }
