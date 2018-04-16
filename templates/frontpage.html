@@ -1,28 +1,28 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="off-canvas-wrapper">
-	<button type="button" class="button category-display-button" data-toggle="offCanvas">View Categories</button>
-	<div class="category-pane off-canvas position-left off-canvas-absolute reveal-for-medium" id="offCanvas" data-off-canvas>
-		<!-- Close button -->
-		<button class="close-button" aria-label="Close menu" type="button" data-close>
-		  <span aria-hidden="true">&times;</span>
-		</button>
-		<div data-sticky-container>
-			<div class="sticky" data-sticky data-options="marginTop:2.75;" data-top-anchor="item-pane" >
-			<h2>Categories</h2>
-			{% for category in categories %}
-				<a href='{{ url_for('ViewCategory', category_name = category.name) }}'><h5>{{category.name}}</h5></a>
-			{% endfor %}
-			</div>
-		</div>
-	</div>
-	<div class="items-pane off-canvas-content" id="item-pane" data-off-canvas-content>
-		<h2 class="item-pane-title">Items</h2>
-		<div class="row">
-		{% for item in items %}
-				{{ itemCard(item) | safe }}
-		{% endfor %}
-		</div>
-	</div>
+    <button type="button" class="button category-display-button" data-toggle="offCanvas">View Categories</button>
+    <div class="category-pane off-canvas position-left off-canvas-absolute reveal-for-medium" id="offCanvas" data-off-canvas>
+        <!-- Close button -->
+        <button class="close-button" aria-label="Close menu" type="button" data-close>
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <div data-sticky-container>
+            <div class="sticky" data-sticky data-options="marginTop:2.75;" data-top-anchor="item-pane" >
+            <h2>Categories</h2>
+            {% for category in categories %}
+                <a href='{{ url_for('ViewCategory', category_name = category.name) }}'><h5>{{category.name}}</h5></a>
+            {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div class="items-pane off-canvas-content" id="item-pane" data-off-canvas-content>
+        <h2 class="item-pane-title">Items</h2>
+        <div class="row">
+        {% for item in items %}
+                {{ itemCard(item) | safe }}
+        {% endfor %}
+        </div>
+    </div>
 </div>
 {% endblock %}
