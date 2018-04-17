@@ -1,17 +1,17 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="row">
-	<div>
-		<h1>My Items</h1>
-		{% for item in items %}
-		<div class="item-wrapper">
-				<div class="button-div">
-					<a class="edit-item button" href="{{ url_for('EditItem', item_id=item.id ) }}">Edit</a>
-					<a class="delete-item hollow button alert" href="{{ url_for('DeleteItem', item_id=item.id ) }}">Delete</a>
-				</div>
-				{{ itemCard(item) | safe }}
-		</div>
-		{% endfor %}
-	</div>
+    <div>
+        <h1>My Items</h1>
+        {% for item in items %}
+        <div class="item-wrapper">
+                <div class="button-div">
+                    <a class="edit-item button" href="{{ url_for('EditItem', item_id=item.id ) }}">Edit</a>
+                    <a class="delete-item hollow button alert" href="{{ url_for('DeleteItem', item_id=item.id ) }}">Delete</a>
+                </div>
+                {{ itemCard(item) | safe }}
+        </div>
+        {% endfor %}
+    </div>
 </div>
 {% endblock %}
